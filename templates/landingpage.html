@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Management System : Welfare</title>
+    {% load static %}
+    <style>
+        /* Start Global Rules */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color:#fff ;
+        }
+        a {
+            text-decoration: none;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Small */
+        @media (min-width: 768px) {
+            .container {
+            width: 750px;
+            }
+        }
+        /* Medium */
+        @media (min-width: 992px) {
+            .container {
+            width: 970px;
+            }
+        }
+        /* Large */
+        @media (min-width: 1200px) {
+            .container {
+            width: 1170px;
+            }
+        }
+        /* End Global Rules */
+        
+        /* Start Landing Page */
+        .landing-page header {
+            min-height: 80px;
+            display: flex;
+            background-color:#fff ;
+        }
+        @media (max-width: 767px) {
+            .landing-page header {
+            min-height: auto;
+            display: initial;
+            }
+        }
+        .landing-page header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        @media (max-width: 767px) {
+            .landing-page header .container {
+            flex-direction: column;
+            justify-content: center;
+            }
+        }
+        .landing-page header .logo {
+            color: #fd7e14;
+            font-style: italic;
+            text-transform: uppercase;
+            font-size: 20px;
+        }
+        @media (max-width: 767px) {
+            .landing-page header .logo {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            }
+        }
+        .landing-page header .links {
+            display: flex;
+            align-items: center;
+        }
+        @media (max-width: 767px) {
+            .landing-page header .links {
+            text-align: center;
+            gap: 10px;
+            }
+        }
+        .landing-page header .links li a {
+            font-weight: 500;
+            margin-left: 30px;
+            color: #fd7e14;
+            cursor: pointer;
+            transition: .3s;
+        }
+        @media (max-width: 767px) {
+            .landing-page header .links li {
+            margin-left: auto;
+            }
+        }
+   
+        .landing-page header .links li:hover {
+           
+            font-size: large;
+            color: #fd7e14;
+        }
+        .landing-page .content .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 140px;
+            min-height: calc(100vh - 80px);
+        }
+        @media (max-width: 767px) {
+            .landing-page .content .container {
+            gap: 0;
+            min-height: calc(100vh - 101px);
+            justify-content: center;
+            flex-direction: column-reverse;
+            }
+        }
+        @media (max-width: 767px) {
+            .landing-page .content .info {
+            text-align: center;
+            margin-bottom: 15px 
+            }
+        }
+        .landing-page .content .info h3 {
+            color: #fd7e14;
+            font-size: 20px;
+        }
+        .landing-page .content .info p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 15px;
+            color:#fd7e14;
+        }
+        .landing-page .content .info button {
+            border: 0;
+            border-radius: 20px;
+            padding: 12px 30px;
+            margin-top: 30px;
+            cursor: pointer;
+            color: #FFF;
+            background-color: #fd7e14;
+        }
+        .landing-page .content .image img {
+            max-width: 100%;
+        }
+        .admin{
+          color:white;
+        }
+        /* End Landing Page */
+        
+    </style>
+</head>
+<body>
+          <!-- Start Landing Page -->
+          <div class="landing-page">
+            <header>
+              <div class="container">
+                <a href="#" class="logo"><b>NGO Management System : Welfare</b></a>
+                <ul class="links">
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                  <li><a href="{% url 'register' %}">Signup</a></li>
+                </ul>
+              </div>
+            </header>
+            <div class="content">
+              <div class="container">
+                <div class="info">
+                  <h3> "Empowering Change, One Volunteer at a Time - Where Compassion Meets Action."</h3>
+                  <p>
+                    Welcome to our NGO Management System: Welfare, a dedicated online platform that seamlessly integrates the heart of volunteering with the precision of event management. Our mission is to facilitate positive change by connecting passionate volunteers with impactful events, creating a powerful synergy for the greater good.</p>
+                  <a href="{% url 'login' %}"><button>Login</button></a>
+                  <a href="{% url 'register' %}"><button>SignUp</button></a>
+                </div>
+                <div class="image">
+                  <img src="{% static 'images/bg_3.jpg' %}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Landing Page -->
+</body>
+</html>
