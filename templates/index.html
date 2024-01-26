@@ -43,12 +43,12 @@
           <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="{% url 'event' %}" class="nav-link">Event</a></li>
           <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Volunteer</a></li>
-          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+       {% if request.user.is_authenticated and request.user.is_staff %}
           <li class="nav-item"><a href="{% url 'admin:index' %}"  class="nav-link">Admin</a></li>
-        {% if request.user.is_authenticated and request.user.is_staff %}
           <li class="nav-item"><a href="{% url 'send_email' %}" class="nav-link">Send Email</a></li>
         {% endif %}
           <li class="nav-item active"><a href="#"  class="nav-link">{{ request.user }}</a></li>
+          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
 
         </ul>
       </div>
@@ -186,7 +186,7 @@
                       <h3 class="heading mb-4"><a href="#">{{ event.title }}</a></h3>
                       <p class="time-loc"><span class="mr-2"><i class="icon-clock-o"></i> {{ event.time }}</span> <span><i class="icon-map-o"></i> {{ event.location }}</span></p></p>
                       <p>{{ event.description }}</p>
-                      <p><a href="#">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
+                      <p><a href="{% url 'joinevent' event.id %}">Join Event <i class="ion-ios-arrow-forward"></i></a></p>
                   </div>
               </div>
           </div>

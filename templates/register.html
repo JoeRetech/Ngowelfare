@@ -72,8 +72,11 @@
       border-color: #fd7e14;
       }
       form .policy{
-      display: flex;
-      align-items: center;
+        display:flex;
+        align-items: flex-start;
+  
+    
+      
       }
       form h3{
       color: #707070;
@@ -106,6 +109,13 @@
       hr{
         color: #fff;
       }
+      form i {
+        margin-left: -30px;
+        cursor: pointer;
+    }
+    .ap{
+      text-indent: 10px;
+    }
     </style>
    </head>
 <body>
@@ -119,7 +129,7 @@
         {% endfor %}
       </div>
   {% endif %}
-    <form action="#" method="post">
+    <form action="{% url 'register' %}" method="post">
       {% csrf_token %}
       <div class="input-box">
         <input type="text" name="first_name" placeholder="Enter your first name" required>
@@ -128,23 +138,81 @@
         <input type="text" name="last_name" placeholder="Enter your last name" required>
       </div>
       <div class="input-box">
-        <input type="text" name="username" placeholder="Enter your user name" required>
+        <input type="text" name="username" placeholder="Enter your email" required>
       </div>
       <div class="input-box">
-        <input type="password" name="password" placeholder="Create password" required>
+        <input type="password" class="password" name="password" id="password" required placeholder="Create password" onkeyup='check()'>
+        <i class="bi bi-eye-slash" id="togglePassword1"></i>
       </div>
+      <div class="input-box">
+        <input type="password" id="checkPassword" class="password"  placeholder="Confrim password" required onkeyup='check()'>
+        <i class="bi bi-eye-slash" id="togglePassword2"></i>
+      </div>
+      <p class="ap" id="alertPassword"></p>
+    
       <div class="policy">
-        <input type="checkbox">
+        <input type="checkbox" required >
         <h3>I accept all terms & condition</h3>
       </div>
       <div class="input-box button">
-        <input type="Submit" value="Register Now">
+        <input type="submit" value="Register Now">
       </div>
       <div class="text">
         <h3>Already have an account? <a href="{% url 'login' %}">Login now</a></h3>
       </div>
     </form>
   </div>
+  <script>
+    var check = function() {
+      var password = document.getElementById('password').value;
+      var checkPassword = document.getElementById('checkPassword').value;
+      var alertPassword = document.getElementById('alertPassword');
+  
+      if (checkPassword !== '') {
+        if (password === '' && checkPassword === '') {
+          // Both inputs are empty
+          alertPassword.style.color = '#EE2B39';
+          alertPassword.innerHTML = '<span><i class="fas fa-exclamation-triangle"></i>Passwords cannot be empty</span>';
+        } else if (password === checkPassword) {
+          // Passwords match
+          alertPassword.style.color = '#8CC63E';
+          alertPassword.innerHTML = '<span><i class="fas fa-check-circle"></i> Match !</span>';
+        } else {
+          // Passwords do not match
+          alertPassword.style.color = '#EE2B39';
+          alertPassword.innerHTML = '<span><i class="fas fa-exclamation-triangle"></i> Not matching</span>';
+        }
+      } else {
+        // Reset the alert message if checkPassword is empty
+        alertPassword.innerHTML = '';
+      }
+    }
+  
+    const togglePassword1 = document.querySelector("#togglePassword1");
+    const togglePassword2 = document.querySelector("#togglePassword2");
+    const password1 = document.querySelector("#password");
+    const password2 = document.querySelector("#checkPassword");
+  
+    togglePassword1.addEventListener("click", function() {
+      togglePassword(password1, togglePassword1);
+    });
+  
+    togglePassword2.addEventListener("click", function() {
+      togglePassword(password2, togglePassword2);
+    });
+  
+    function togglePassword(passwordField, icon) {
+      // toggle the type attribute
+      const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+      passwordField.setAttribute("type", type);
+  
+      // toggle the icon
+      icon.classList.toggle("bi-eye-slash");
+      icon.classList.toggle("bi-eye");
+    }
+  </script>
+  
+  
 
 </body>
 </html>

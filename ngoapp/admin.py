@@ -4,3 +4,4 @@ from .models import *
 admin.site.register(Event)
 admin.site.register(Task)
 admin.site.register(Volunteer)
+admin.site.register(JoinEvent)

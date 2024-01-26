@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 
@@ -25,4 +26,19 @@ class Volunteer(models.Model):
 class Task(models.Model):
     description = models.TextField()
     volunteer = models.ForeignKey(Volunteer, on_delete=models.CASCADE)
+    
+class JoinEvent(models.Model):
+    event = models.ForeignKey(Event,on_delete=models.CASCADE)
+    name=models.CharField(max_length=200)
+    email=models.CharField(max_length=200)
+    
+    def __str__(self):
+        return f"{self.email} - {self.name} - {self.event.title}"
+    
+    
+
+
+
+
+
 

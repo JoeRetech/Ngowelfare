@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required,user_passes_test
 from .models import *
 from .forms import EmailForm
 from django.core.mail import send_mail
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
+
+
+
 
 
 def index(request):
@@ -25,13 +32,14 @@ def register(request):
         user = User.objects.filter(username = username)
         
         if user.exists():
-            messages.info(request, "Username already taken")
+            messages.info(request, "Email already taken")
             return redirect('/register/')
         
         user =User.objects.create(
             first_name = first_name,
             last_name = last_name,
             username = username,
+            email=username,
             password = password
         )
         user.set_password(password)
@@ -45,7 +53,7 @@ def register(request):
 def login_page(request):
     if request.method == "POST":
         username = request.POST.get('username')
-        password = request.POST.get('password1')
+        password = request.POST.get('password')
         
         if not User.objects.filter(username=username).exists():
             messages.info(request, "Invalid Username")
@@ -62,6 +70,10 @@ def login_page(request):
             return redirect('/home/')
     
     return render(request,'login.html')
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 def logout_page(request):
     logout(request)
@@ -118,6 +130,15 @@ def send_email(request):
             return redirect('home')  # Redirect to a thank-you page or any other desired page
 
     return render(request, 'email.html', {'form': form})
+
+def joinevent(request,id):
+    events=Event.objects.get(id=id)
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        JoinEvent.objects.create(event=events,name=name,email=email)
+        return redirect('home') 
+    return render(request,'joineventform.html',{'events':events})
 
 
 

@@ -42,12 +42,12 @@
           <li class="nav-item "><a href="{% url 'home' %}" class="nav-link">Home</a></li>
           <li class="nav-item"><a href="{% url 'event' %}" class="nav-link">Event</a></li>
           <li class="nav-item active"><a href="{% url 'contact' %}" class="nav-link">Volunteer</a></li>
-          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
-          <li class="nav-item"><a href="{% url 'admin:index' %}"  class="nav-link">Admin</a></li>
         {% if request.user.is_authenticated and request.user.is_staff %}
           <li class="nav-item"><a href="{% url 'send_email' %}" class="nav-link">Send Email</a></li>
+          <li class="nav-item"><a href="{% url 'admin:index' %}"  class="nav-link">Admin</a></li>
         {% endif %}
           <li class="nav-item active"><a href="#"  class="nav-link">{{ request.user }}</a></li>
+          <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
 
        </ul>
       </div>
@@ -60,7 +60,7 @@
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
           <div class="col-md-7 ftco-animated text-center" data-scrollax=" properties: { translateY: '70%' }">
-             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Voluntee</span></p>
+             <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="{% url 'home' %}">Home</a></span> <span>Volunteer</span></p>
             <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Be A Volunteer</h1>
           </div>
         </div>
@@ -78,18 +78,22 @@
             <form action="{% url 'contact' %}" method='post'>
               {% csrf_token %}
               <div class="form-group">
+                <label for="name">Name</label>
                 <input type="text" name='name'  class="form-control" placeholder="Your Name">
               </div>
               
               <div class="form-group">
+                <label for="dob">Date of Birth</label>
                 <input type="date" name='dob'  class="form-control" placeholder="Date of Birth">
               </div>
 
               <div class="form-group">
+                <label for="email">Email</label>
                 <input type="text" name="email" class="form-control" placeholder="Your Email">
               </div>
 
               <div class="form-group">
+                <label for="message">Message</label>
                 <textarea name="message" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
               </div>
               <div class="form-group">
